@@ -1,16 +1,16 @@
 {
-  "dependencies": {
-    "moment": "^2.30.1"
-  },
   "name": "dzshka2",
   "version": "1.0.0",
+  "description": "",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node script.js"
   },
-  "keywords": [],
+  "dependencies": {
+    "express": "^4.21.0",
+    "moment": "^2.30.1"
+  },
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
