@@ -3,16 +3,19 @@ const moment = require('moment');
 const path = require('path');
 
 const app = express();
-const port = 8000;
+const port = 3000;
 
-app.use('/static/', express.static(path.join(__dirname, 'static'))) 
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'templates')); 
 
 function getDate() {
     return moment().format('YYYY/MM/DD HH:mm:ss');
 }
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./templates/index.html"))
+    res.sendFile(path.join(__dirname,'templates', 'index.html'));
 });
 
 app.get('/date', (req, res) => {
@@ -21,6 +24,16 @@ app.get('/date', (req, res) => {
     res.send(`дата та час: ${currentDate}`);
 });
 
+app.get('/posts', (req, res) => {
+    const posts = [
+        { name: 'Post 1', author: 'Author 1' },
+        { name: 'Post 2', author: 'Author 2' },
+        { name: 'Post 3', author: 'Author 3' }
+    ];
+
+    res.render('posts', { posts });
+});
+
 app.listen(port, () => {
-    console.log(`cервер: http://localhost:${port}`);
+    console.log(`сервер http://localhost:${port}`);
 });
