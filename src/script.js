@@ -39,7 +39,24 @@ app.get('/user', (req, res) => {
 });
 
 app.get('/comments', (req, res) => {
-    res.render('comments');
+    const comments = [
+        { 
+            title: 'cool title', 
+            message: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis, ad. Optio dolores molestiae, in, ex perferendis vel error quidem sint labore dolor quia repellendus. Placeat nesciunt obcaecati quis dolore nostrum.', 
+            author: 'Author 1', 
+        },
+        { 
+            title: 'awesome title', 
+            message: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis ducimus ut exercitationem sed natus officiis ab rerum corporis sequi beatae ipsam asperiores, adipisci reiciendis aspernatur placeat animi veniam pariatur molestias?', 
+            author: 'Author 2', 
+        },
+        { 
+            title: 'perfect title', 
+            message: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, quidem possimus quas dolorem praesentium doloremque nemo perspiciatis voluptates est quae distinctio nisi aliquid, quibusdam fugit nam ipsa culpa hic illum!', 
+            author: 'Author 3', 
+        }
+    ];
+    res.render('comments', { comments });
 });
 
 app.listen(port, () => {

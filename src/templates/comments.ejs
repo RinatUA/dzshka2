@@ -22,22 +22,14 @@
     }
     </style>
     <h1>comments</h1>
-    <div id="comments">
-        <div class="comment">
-            <h2>cool title 1</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis, ad. Optio dolores molestiae, in, ex perferendis vel error quidem sint labore dolor quia repellendus. Placeat nesciunt obcaecati quis dolore nostrum.</p>
-            <p><strong>Author:</strong> Author 1</p>
-        </div>
-        <div class="comment">
-            <h2>awesome title 1</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis ducimus ut exercitationem sed natus officiis ab rerum corporis sequi beatae ipsam asperiores, adipisci reiciendis aspernatur placeat animi veniam pariatur molestias?</p>
-            <p><strong>Author:</strong> Author 2</p>
-        </div>
-        <div class="comment">
-            <h2>perfect title 1</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi, quidem possimus quas dolorem praesentium doloremque nemo perspiciatis voluptates est quae distinctio nisi aliquid, quibusdam fugit nam ipsa culpa hic illum!</p>
-            <p><strong>Author:</strong> Author 3</p>
-        </div>
+    <div id="comments"></div>
+        <% comments.forEach(comment => { %>
+            <div class="comment">
+                <h2><%= comment.title %></h2>
+                <p><%= comment.message %></p>
+                <p><strong>Автор:</strong> <%= comment.author %></p>
+            </div>
+        <% }) %>
     </div>
 </body>
 </html>
