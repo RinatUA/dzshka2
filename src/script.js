@@ -34,6 +34,10 @@ app.get('/posts', (req, res) => {
     res.render('posts', { posts });
 });
 
+app.get('/user', (req, res) => {
+    res.render('user');
+});
+
 app.listen(port, () => {
     console.log(`сервер http://localhost:${port}`);
 });
