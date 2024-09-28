@@ -38,6 +38,10 @@ app.get('/user', (req, res) => {
     res.render('user');
 });
 
+app.get('/comments', (req, res) => {
+    res.render('comments');
+});
+
 app.listen(port, () => {
     console.log(`сервер http://localhost:${port}`);
 });
