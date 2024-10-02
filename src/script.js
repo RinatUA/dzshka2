@@ -8,11 +8,35 @@ const port = 3000;
 app.use(express.static(path.join(__dirname, 'static')));
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'templates')); 
+app.set('views', path.join(__dirname, 'templates'));
 
 function getDate() {
     return moment().format('YYYY/MM/DD HH:mm:ss');
 }
+
+const posts = [
+    { 
+        id: 1, 
+        name: 'post1', 
+        author: 'author1', 
+        description: 'desc1', 
+        date: '2023/10/01 14:30:00' 
+    },
+    { 
+        id: 2, 
+        name: 'post2', 
+        author: 'author2', 
+        description: 'desc2', 
+        date: '2023/10/05 11:15:00' 
+    },
+    { 
+        id: 3, 
+        name: 'post3', 
+        author: 'author3', 
+        description: 'desc3', 
+        date: '2023/10/10 16:45:00' 
+    }
+];
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'templates', 'index.html'));
@@ -25,13 +49,18 @@ app.get('/date', (req, res) => {
 });
 
 app.get('/posts', (req, res) => {
-    const posts = [
-        { name: 'Post 1', author: 'Author 1' },
-        { name: 'Post 2', author: 'Author 2' },
-        { name: 'Post 3', author: 'Author 3' }
-    ];
-
     res.render('posts', { posts });
+});
+
+app.get('/post/:id', (req, res) => {
+    const postId = parseInt(req.params.id); 
+    const post = posts.find(p => p.id === postId);
+
+    if (post) {
+        res.render('post', { post });
+    } else {
+        res.render('post_not_found', { postId });
+    }
 });
 
 app.get('/user', (req, res) => {

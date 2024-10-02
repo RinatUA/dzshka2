@@ -1,10 +1,9 @@
-<html lang="en"></html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="/script2.js"></script>
+    <title><%= post.name %></title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <style>
@@ -52,15 +51,11 @@
         text-decoration: underline;
     }
     </style>
-    <h1>список постів</h1>
-
-    <div id="posts-container">
-        <% posts.forEach(post => { %>
-            <div class="post">
-                <h2><%= post.name %></h2>
-                <p>автор: <%= post.author %></p>
-            </div>
-        <% }); %>
+    <div class="post-card">
+        <h1><%= post.name %></h1>
+        <p>Author: <%= post.author %></p>
+        <p>Description: <%= post.description %></p>
+        <p>Published on: <%= post.date %></p>
     </div>
 </body>
 </html>
