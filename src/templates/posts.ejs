@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts</title>
     <link rel="stylesheet" href="/style.css">
-    <script src="/script2.js"></script>
+    <script src="/posts.js"></script>
 </head>
 <body>
     <style>
@@ -52,15 +52,16 @@
         text-decoration: underline;
     }
     </style>
-    <h1>список постів</h1>
+    <h1>All Posts</h1>
 
-    <div id="posts-container">
+    <ul>
         <% posts.forEach(post => { %>
-            <div class="post">
-                <h2><%= post.name %></h2>
-                <p>автор: <%= post.author %></p>
-            </div>
-        <% }); %>
-    </div>
+            <li><strong><%= post.name %></strong> by <%= post.author %></li>
+        <% }) %>
+    </ul>
+
+    <button id="createPostBtn">створити пост</button>
+    
+    <div id="message"></div>
 </body>
 </html>

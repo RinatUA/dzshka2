@@ -1,12 +1,11 @@
 const express = require('express');
 const moment = require('moment');
 const path = require('path');
-
 const app = express();
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'static')));
-
+app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'templates'));
 
@@ -51,6 +50,22 @@ app.get('/date', (req, res) => {
 app.get('/posts', (req, res) => {
     res.render('posts', { posts });
 });
+
+app.post('/post/create', (req, res) => {
+    const newPost = {
+        id: posts.length + 1,
+        name: req.body.name,
+        author: req.body.author,
+        description: req.body.description,
+        date: moment().format('YYYY/MM/DD HH:mm:ss')
+    };
+
+    posts.push(newPost);
+    console.log('новий пост:', newPost);
+
+    res.json({ message: 'пост створено', post: newPost });
+});
+
 
 app.get('/post/:id', (req, res) => {
     const postId = parseInt(req.params.id); 
