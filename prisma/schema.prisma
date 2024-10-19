@@ -13,19 +13,5 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id          Int       @id @default(autoincrement())
-  name        String
-  author      String
-  description String
-  date        DateTime
-  comments    Comment[]
-}
-
-model Comment {
-  id      Int     @id @default(autoincrement())
-  title   String
-  body    String
-  postId  Int
-  post    Post    @relation(fields: [postId], references: [id])
-}
+import { Post } from "./models/post.prisma"
+import { Comment } from "./models/comment.prisma"

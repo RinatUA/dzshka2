@@ -1,6 +1,7 @@
-/node_modules/
+node_modules
 .env
 db/
 migrations/
 package-lock.json
 .vscode
+/prisma/topsecret.db
