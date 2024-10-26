@@ -1,6 +1,6 @@
 //роутер для постів, дає маршрути контролеру
 import { Router } from 'express';
-import { getAllPosts, getPostById, createPost } from '../controllers/postController';
+import { getAllPosts, getPostById, createPost } from '../PostApp/postController';
 
 const router: Router = Router();
 

@@ -4,6 +4,6 @@ model User {
   email    String   @unique
   password String
   role     String
-  posts    Post[]   @relation("UserPosts")
-  comments Comment[] @relation("UserComments")
+  posts    Post[]
+  comments Comment[]
 }
