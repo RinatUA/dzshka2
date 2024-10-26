@@ -1,13 +1,13 @@
 import express, { Express, Request, Response } from 'express'
 import path from 'path';
 import postRouter from './routers/postRouter';
+import userRoutes from './routers/userRouter';
 
-const app: Express = express()
-const port: number = 3000;
+const app = express()
+const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'templates'));
 
@@ -16,6 +16,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/posts', postRouter);
+app.use('/users', userRoutes);
 
 app.get('/date', (req: Request, res: Response) => {
     const currentDate = new Date().toISOString();
