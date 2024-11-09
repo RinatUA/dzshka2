@@ -1,22 +1,28 @@
 import client from '../client/prismaClient';
+import { User } from "@prisma/client";
 
 async function findUserByEmail(email: string) {
-    const user = await client.user.findUnique({
-        where: { email }
-    });
-    return user || null;
+    try {
+        const user = await client.user.findUnique({
+            where: { email }
+        });
+        return user;
+    } catch (err) {
+        console.error("не знайшов юзера по емейлу:", err);
+        return null;
+    }
 }
 
 async function createUser(userData: { email: string, password: string, username: string, role: string }) {
-    const newUser = await client.user.create({
-        data: {
-            email: userData.email,
-            password: userData.password,
-            username: userData.username,
-            role: userData.role
-        }
-    });
-    return newUser;
+    try {
+        const newUser = await client.user.create({
+            data: userData
+        });
+        return newUser;
+    } catch (err) {
+        console.error("помилка при створенні юзера:", err);
+        throw err;
+    }
 }
 
 const userRepository = {

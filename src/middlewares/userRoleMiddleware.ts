@@ -1,13 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
+import { verify } from 'jsonwebtoken';
+import { SECRET_KEY } from '../config/config';
 
-const userRoleMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const user = req.cookies.user ? JSON.parse(req.cookies.user) : null;
-
-    if (user && user.role == 'admin') {
-        return next();
+export function authMiddleware(req: Request, res: Response, next: NextFunction){
+    const cookies = req.cookies
+    if (cookies.token){
+        const token = verify(cookies.token, SECRET_KEY)
+        res.locals.user = token
+        next()
     } else {
-        return res.status(403).json({ message: 'Forbidden' });
+        res.sendStatus(401)
     }
-};
+}
 
-export default userRoleMiddleware;
+
+export default authMiddleware;

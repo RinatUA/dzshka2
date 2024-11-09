@@ -1,16 +1,12 @@
 import userRepository from './userRepository';
-
+import { verify } from 'jsonwebtoken';
 async function authenticateUser(email: string, password: string) {
     const user = await userRepository.findUserByEmail(email);
-    
-    if (user == null) {
+    //я котик?
+    //⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
+    if (!user || user.password != password) {
         return null;
     }
-
-    if (user.password != password) {
-        return null;
-    }
-    
     return user;
 }
 

@@ -41,3 +41,4 @@ app.get('/comments', (req: Request, res: Response) => {
 app.listen(port, () => {
     console.log(`сервер http://localhost:${port}`);
 });
+    
