@@ -37,16 +37,13 @@ async function authRegistration(req: Request, res: Response) {
 
         const result = await userService.registerUser({ email, password, username });
 
-        if (result == null) {
-            return res.status(409).json({ err: "юзер вже існує" });
+        if (result.status == 'error'){
+            res.send(result.message)
+            return
         }
-        const token = sign({ id: result.id, email: result.email, username: result.username, role: result.role }, SECRET_KEY, { expiresIn: '1h' });
+        const token = sign(result.data, SECRET_KEY, {expiresIn: '1h'})
         res.cookie('token', token);
-        
-        res.status(201).json({ message: 'вийшло зареєструватись', user: result });
-    } catch (err) {
-        console.error("помилка під час реєстрації:", err);
-        return res.status(500).json({ err: "серверна помилка" });
+        res.status(200).json({ status: "ok" }); 
     }
 }
 

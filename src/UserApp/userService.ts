@@ -1,5 +1,22 @@
 import userRepository from './userRepository';
 import { verify } from 'jsonwebtoken';
+
+interface IsuccessResponse {
+    status: "ok";
+    user: {
+        id: number;
+        username: string;
+        email: string;
+        role: string;
+    };
+}
+
+interface IerrorResponse {
+    status: "error";
+    message: string;
+}
+
+
 async function authenticateUser(email: string, password: string) {
     const user = await userRepository.findUserByEmail(email);
     //я котик?
@@ -13,9 +30,10 @@ async function authenticateUser(email: string, password: string) {
 async function registerUser(userData: { email: string, password: string, username: string }) {
     const existingUser = await userRepository.findUserByEmail(userData.email);
     
-    if (existingUser != null) {
-        return null;
+    if (existingUser) {
+        return { status: "error", message: "User exists" };
     }
+
 
     const newUser = await userRepository.createUser({
         email: userData.email,
@@ -24,7 +42,7 @@ async function registerUser(userData: { email: string, password: string, usernam
         role: "user"
     });
 
-    return newUser;
+    return { status: "ok", user: { id: newUser.id, username: newUser.username, email: newUser.email, role: newUser.role } };
 }
 
 const userService = {
