@@ -12,6 +12,7 @@ function register(req: Request, res: Response){
 }
 
 async function authUser(req: Request, res: Response) {
+    const data = req.body
     try {
         const { email, password } = req.body;
         const user = await userService.authenticateUser(email, password);
@@ -32,20 +33,19 @@ async function authUser(req: Request, res: Response) {
 
 
 async function authRegistration(req: Request, res: Response) {
-    try {
-        const { email, password, username } = req.body;
+    const data = req.body
+    const { email, password, username } = req.body;
 
-        const result = await userService.registerUser({ email, password, username });
+    const result = await userService.registerUser({ email, password, username });
 
-        if (result.status == 'error'){
-            res.send(result.message)
-            return
-        }
-        const token = sign(result.data, SECRET_KEY, {expiresIn: '1h'})
-        res.cookie('token', token);
-        res.status(200).json({ status: "ok" }); 
+    if (result.status == 'error'){
+        res.send(result.message)
+        return
     }
-}
+    const token = sign(result.data, SECRET_KEY, {expiresIn: '1h'})
+    res.cookie('token', token);
+    res.status(200).json({ status: "ok" }); 
+    }
 
 const userController = {
     login: login,

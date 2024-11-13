@@ -9,14 +9,13 @@ async function findUserByEmail(email: string) {
         return user;
     } catch (err) {
         console.error("не знайшов юзера по емейлу:", err);
-        return null;
     }
 }
 
-async function createUser(userData: { email: string, password: string, username: string, role: string }) {
+async function createUser(data: { email: string, password: string, username: string, role: string }) {
     try {
         const newUser = await client.user.create({
-            data: userData
+            data: data
         });
         return newUser;
     } catch (err) {
