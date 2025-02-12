@@ -1,26 +1,8 @@
 import userRepository from './userRepository';
-import { verify } from 'jsonwebtoken';
-
-interface IsuccessResponse {
-    status: "ok";
-    user: {
-        id: number;
-        username: string;
-        email: string;
-        role: string;
-    };
-}
-
-interface IerrorResponse {
-    status: "error";
-    message: string;
-}
-
+import { IsuccessResponse, IerrorResponse } from './types';
 
 async function authenticateUser(email: string, password: string) {
     const user = await userRepository.findUserByEmail(email);
-    //я котик?
-    //⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
     if (!user || user.password != password) {
         return null;
     }
