@@ -1,5 +1,6 @@
 import userRepository from './userRepository';
-import { IsuccessResponse, IerrorResponse } from './types';
+import { ISuccess, IError } from '../types';
+import { IUser } from './types'
 
 async function authenticateUser(email: string, password: string) {
     const user = await userRepository.findUserByEmail(email);
@@ -9,7 +10,7 @@ async function authenticateUser(email: string, password: string) {
     return user;
 }
 
-async function registerUser(userData: { email: string, password: string, username: string }) {
+async function registerUser(userData: { email: string, password: string, username: string }): Promise< IError | ISuccess<IUser> > {
     const existingUser = await userRepository.findUserByEmail(userData.email);
     
     if (existingUser) {
