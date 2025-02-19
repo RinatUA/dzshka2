@@ -1,14 +1,17 @@
 import commentRepository from './commentRepository';
-import { Prisma } from '@prisma/client'
 import { IError, ISuccess } from '../types'
-import { IComment } from './types'
+import { Comment } from './types'
 
-async function getCommentsForPost(postId: number): Promise<ISuccess<IComment> | IError> {
+async function getCommentsForPost(postId: number): Promise<ISuccess<Comment> | IError> {
     return await commentRepository.getCommentsByPostId(postId);
 }
 
-async function getCommentsForUser(userId: number): Promise<ISuccess<IComment[]> | IError> {
+async function getCommentsForUser(userId: number): Promise<ISuccess<Comment[]> | IError> {
     return await commentRepository.getCommentsByUserId(userId);
 }
+const commentService = {
+    getCommentsForPost, 
+    getCommentsForUser
+}
 
-export { getCommentsForPost, getCommentsForUser };
+export default commentService;

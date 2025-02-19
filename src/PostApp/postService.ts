@@ -38,5 +38,11 @@ async function deletePost(id: number) {
         where: { id }
     });
 }
-
-export { getAllPosts, getPostById, createPost, updatePost, deletePost };
+const postService = { 
+    getAllPosts, 
+    getPostById, 
+    createPost, 
+    updatePost, 
+    deletePost 
+};
+export default postService 

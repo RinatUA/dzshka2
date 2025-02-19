@@ -3,6 +3,9 @@ import path from 'path';
 import postRouter from './PostApp/postRouter';
 import userRouter from './UserApp/userRouter';
 import cookieParser from 'cookie-parser';
+import postRouterApi from './PostApp/postRouterApi';
+import commentRouterApi from './CommentApp/commentRouterApi';
+import cors from 'cors'
 
 const app: Express = express();
 const port: number = 8000;
@@ -14,6 +17,12 @@ app.use(cookieParser());
 app.use('/static/', express.static(path.join(__dirname, 'static')))
 app.use('/posts', postRouter);
 app.use('/users', userRouter);
+app.use(cors({
+    origin: ['http://localhost:3000']
+}));
+
+app.use('/api/post/', postRouterApi)
+app.use('/api/comment/', commentRouterApi)
 
 app.get('/', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, 'templates', 'index.html'));

@@ -1,8 +1,3 @@
-export interface IComment {
-    id: number
-    contact: string
-    description: string
-    image?: string | null
-    postId: number
-    userId: number
-}
+import { Prisma } from "@prisma/client";
+
+export type Comment = Prisma.CommentGetPayload<{}>
