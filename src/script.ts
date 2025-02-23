@@ -5,6 +5,7 @@ import userRouter from './UserApp/userRouter';
 import cookieParser from 'cookie-parser';
 import postRouterApi from './PostApp/postRouterApi';
 import commentRouterApi from './CommentApp/commentRouterApi';
+import tagsControllerApi from './TagsApp/tagsRouter';
 import cors from 'cors'
 
 const app: Express = express();
@@ -23,6 +24,7 @@ app.use(cors({
 
 app.use('/api/post/', postRouterApi)
 app.use('/api/comment/', commentRouterApi)
+app.use('/api/tags/', tagsControllerApi)
 
 app.get('/', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, 'templates', 'index.html'));

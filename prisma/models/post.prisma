@@ -4,5 +4,7 @@ model Post {
   body     String
   author   User     @relation(fields: [authorId], references: [id])
   authorId Int
+  tagId    Int?
   comments Comment[]
+  Tags     Tags?    @relation(fields: [tagId], references: [id])
 }

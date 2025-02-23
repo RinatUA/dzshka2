@@ -2,6 +2,28 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+async function createPost(){
+  const post = await prisma.post.create({
+      data: {
+          name: "pizzaa", 
+          author: "someone", 
+          description: "comment ??", 
+          userId: 2,
+          tagId: 1
+      }
+  })
+  return post;
+}
+
+async function createTag(){
+  const post = await prisma.tags.create({
+      data: {
+          name: "pizzaa", 
+      }
+  })
+  return post;
+  }
+
 async function createComment() {
   // Создание одного комментария
   await prisma.comment.create({
@@ -51,7 +73,7 @@ async function deleteComment(id: number) {
   // Удаление комментария по id
   await prisma.comment.delete({
     where: { id },
-  });
+  }); 
   console.log(`Comment ${id} deleted`);
 }
 
