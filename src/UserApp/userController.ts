@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import userService from './userService';
-import { SECRET_KEY } from '../config/token';
+import { SECRET_KEY } from '../config/config';
 import { sign } from 'jsonwebtoken'
 
 function login(req: Request, res: Response){

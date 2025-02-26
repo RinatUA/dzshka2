@@ -1,5 +1,4 @@
 import client from '../client/prismaClient';
-import { User } from "@prisma/client";
 
 async function findUserByEmail(email: string) {
     try {
