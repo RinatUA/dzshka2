@@ -7,7 +7,10 @@ import postRouterApi from './PostApp/postRouterApi';
 import commentRouterApi from './CommentApp/commentRouterApi';
 import tagsControllerApi from './TagsApp/tagsRouter';
 import cors from 'cors'
+import dotenv from 'dotenv'
+import { authTokenMiddleware } from './middlewares/authTokenMiddleware';
 
+dotenv.config()
 const app: Express = express();
 const port: number = 8000;
 

@@ -1,4 +1,5 @@
 import client from '../client/prismaClient';
+import { Prisma } from '@prisma/client';
 
 async function findUserByEmail(email: string) {
     try {
@@ -23,9 +24,25 @@ async function createUser(data: { email: string, password: string, username: str
     }
 }
 
+async function findUserById(userId: number){
+    try {
+        const user = await client.user.findUnique({
+            where: {
+                id: userId
+            }
+        });
+        return user;
+
+    } catch (err) {
+        console.log(err)
+    }
+
+}
+
 const userRepository = {
+    findUserById,
     findUserByEmail,
-    createUser
+    createUser,
 };
 
 export default userRepository;

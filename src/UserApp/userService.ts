@@ -31,9 +31,18 @@ async function registerUser(userData: { email: string, password: string, usernam
     return { status: "success", data: newUser};
 }
 
+async function getUserById(userId: number): Promise< IError | ISuccess<IUser>>{
+    const user = await userRepository.findUserById(userId)
+
+    if (!user) {
+        return { status: "error", message: "User not found!"}
+    }
+    return { status: "success", data: user}
+}
 const userService = {
     authenticateUser,
     registerUser,
+    getUserById,
 };
 
 export default userService;

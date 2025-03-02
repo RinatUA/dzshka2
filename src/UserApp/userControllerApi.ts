@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import userService from './userService'
 import { SECRET_KEY } from '../config/config'
 import { sign } from 'jsonwebtoken'
@@ -39,9 +39,20 @@ async function authRegistration(req: Request, res: Response) {
     res.status(200).json({ status: "ok" });
 }
 
+async function userInfo(req: Request, res: Response){
+    const userId = res.locals.userId
+    const result = await userService.getUserById(userId)
+
+    if (result.status === 'error') {
+        res.status(400)
+    }
+    res.status(200).json({ user: result });
+}
+
 const userControllerApi = {
     authLogin: authLogin,
     authRegistration: authRegistration,
+    userInfo: userInfo,
 }
 
 export default userControllerApi
