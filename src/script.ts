@@ -8,6 +8,7 @@ import commentRouterApi from './CommentApp/commentRouterApi';
 import tagsControllerApi from './TagsApp/tagsRouter';
 import cors from 'cors'
 import dotenv from 'dotenv'
+// Импорт не используется, нужно убрать
 import { authTokenMiddleware } from './middlewares/authTokenMiddleware';
 
 dotenv.config()
@@ -38,11 +39,11 @@ app.get('/date', (req: Request, res: Response) => {
     console.log(`дата та час: ${currentDate}`);
     res.send(`дата та час: ${currentDate}`);
 });
-
+// Здесь это не надо
 app.get('/user', (req: Request, res: Response) => {
     res.render('user');
 });
-
+// Здесь это не надо, перенести в commentApp
 app.get('/comments', (req: Request, res: Response) => {
     const comments: any[] = [
         { title: 'cool title', message: 'Lorem ipsum dolor sit amet consectetur.', author: 'Author 1' },

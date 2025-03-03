@@ -1,4 +1,5 @@
 import client from '../client/prismaClient';
+//  Импорт не используется, нужно убрать
 import { Prisma } from '@prisma/client';
 
 async function findUserByEmail(email: string) {
@@ -11,7 +12,7 @@ async function findUserByEmail(email: string) {
         console.error("не знайшов юзера по емейлу:", err);
     }
 }
-
+// Тип должен братся из Prisma
 async function createUser(data: { email: string, password: string, username: string, role: string }) {
     try {
         const newUser = await client.user.create({
@@ -20,6 +21,7 @@ async function createUser(data: { email: string, password: string, username: str
         return newUser;
     } catch (err) {
         console.error("помилка при створенні юзера:", err);
+        // throw делать не надо
         throw err;
     }
 }

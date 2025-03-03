@@ -1,7 +1,7 @@
 import commentRepository from './commentRepository';
 import { IError, ISuccess } from '../types'
 import { Comment } from './types'
-
+// Сделай все сервисы под один стиль!
 async function getCommentsForPost(postId: number): Promise<ISuccess<Comment> | IError> {
     return await commentRepository.getCommentsByPostId(postId);
 }

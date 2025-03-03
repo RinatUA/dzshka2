@@ -1,3 +1,4 @@
+// Используем типы из призмы!
 export interface IUser{
     id: number,
     username: string,

@@ -1,5 +1,7 @@
 //контролер для постів, оброблює запити і викликає сервіси
 import { Request, Response } from 'express';
+// Так не работает, у тебя экспортируется объект по умолчанию
+// import postService from './postService';
 import { getAllPosts as getAll, getPostById as getPostByIdService, createPost as createPostService } from './postService';
 
 export function getAllPosts(req: Request, res: Response){

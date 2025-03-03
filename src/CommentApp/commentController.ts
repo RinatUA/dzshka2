@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+// Из сервиса экспортируешь объект с функциями по умолчанию
 import { getCommentsForPost, getCommentsForUser } from './commentService';
 
 export async function getCommentsByPostId(req: Request, res: Response) {

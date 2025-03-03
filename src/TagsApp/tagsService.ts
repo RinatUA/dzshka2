@@ -1,7 +1,8 @@
 import { IError, ISuccess } from "../types";
 import { Tag } from './types'
 import tagsRepository from './tagsRepository';
-
+// ну если делаешь так тут, то и делай try catch везде с учетом что repository может выкинуть ошибку
+// Если репо может выкинуть ошибку, тогда делаем try catch, но лучше в контроллере
 async function allTags(): Promise<ISuccess<Tag[]> | IError> {
     try {
         const tags = await tagsRepository.findTags();

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import userService from './userService';
+// Подпись токена перенести в сервис
 import { SECRET_KEY } from '../config/config';
 import { sign } from 'jsonwebtoken'
 
@@ -33,6 +34,7 @@ async function authUser(req: Request, res: Response) {
 
 
 async function authRegistration(req: Request, res: Response) {
+    // не испльзуешь
     const data = req.body
     const { email, password, username } = req.body;
 

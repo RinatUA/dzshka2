@@ -1,9 +1,11 @@
-// //сервіс для роботи з постами, операції з даними
+//сервіс для роботи з постами, операції з даними
 import { PrismaClient } from '@prisma/client';
 import moment from 'moment';
-
+// Сделать сервис в один стиль с TagApp и UserApp
+// Здесь это не надо
 const prisma = new PrismaClient();
-
+// Все запросы в БД перенести в репо
+// Если репо может выкинуть ошибку, тогда делаем try catch, но лучше в контроллере
 async function getAllPosts() {
     return await prisma.post.findMany();
 }

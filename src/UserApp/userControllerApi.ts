@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import userService from './userService'
 import { SECRET_KEY } from '../config/config'
 import { sign } from 'jsonwebtoken'
-
+// Подпись токена перенести в сервис
 async function authLogin(req: Request, res: Response) {
     const data = req.body
     try {
@@ -26,6 +26,7 @@ async function authLogin(req: Request, res: Response) {
 
 async function authRegistration(req: Request, res: Response) {
     const data = req.body
+    // зачем, если не используешь
     const { email, password, username } = req.body
 
     const result = await userService.registerUser(data)
