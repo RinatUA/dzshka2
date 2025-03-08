@@ -8,7 +8,6 @@ import commentRouterApi from './CommentApp/commentRouterApi';
 import tagsControllerApi from './TagsApp/tagsRouter';
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { authTokenMiddleware } from './middlewares/authTokenMiddleware';
 
 dotenv.config()
 const app: Express = express();
@@ -39,18 +38,7 @@ app.get('/date', (req: Request, res: Response) => {
     res.send(`дата та час: ${currentDate}`);
 });
 
-app.get('/user', (req: Request, res: Response) => {
-    res.render('user');
-});
 
-app.get('/comments', (req: Request, res: Response) => {
-    const comments: any[] = [
-        { title: 'cool title', message: 'Lorem ipsum dolor sit amet consectetur.', author: 'Author 1' },
-        { title: 'awesome title', message: 'Lorem ipsum dolor sit amet consectetur.', author: 'Author 2' },
-        { title: 'perfect title', message: 'Lorem ipsum dolor sit amet consectetur.', author: 'Author 3' }
-    ];
-    res.render('comments', { comments });
-});
 
 app.listen(port, () => {
     console.log(`сервер http://localhost:${port}`);

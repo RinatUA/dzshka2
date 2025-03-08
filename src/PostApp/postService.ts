@@ -1,48 +1,23 @@
-// //сервіс для роботи з постами, операції з даними
-import { PrismaClient } from '@prisma/client';
-import moment from 'moment';
+//сервіс для роботи з постами, операції з даними
+import postRepository from "./postRepository";
 
-const prisma = new PrismaClient();
-
-async function getAllPosts() {
-    return await prisma.post.findMany();
-}
-
-async function getPostById(id: number) {
-    return await prisma.post.findUnique({
-        where: { id }
-    });
-}
+async function allPosts() {
+    const posts = await postRepository.getAllPosts();
+    return posts;
+    }
 
 async function createPost(postData: { name: string, author: string, description: string }) {
-    const newPost = await prisma.post.create({
-        data: {
-            name: postData.name,
-            author: postData.author,
-            description: postData.description,
-            date: moment().toDate()
-        }
-    });
+    const newPost = await postRepository.createPost(postData);
     return newPost;
 }
 
-async function updatePost(id: number, updateData: { name?: string, author?: string, description?: string }) {
-    return await prisma.post.update({
-        where: { id },
-        data: updateData
-    });
-}
-
-async function deletePost(id: number) {
-    return await prisma.post.delete({
-        where: { id }
-    });
+async function deletePost() {
+    const post = await postRepository.deletePost();
+    return post;
 }
 const postService = { 
-    getAllPosts, 
-    getPostById, 
     createPost, 
-    updatePost, 
-    deletePost 
+    deletePost,
+    allPosts, 
 };
 export default postService 

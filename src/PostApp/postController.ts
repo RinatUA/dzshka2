@@ -1,15 +1,14 @@
 //контролер для постів, оброблює запити і викликає сервіси
 import { Request, Response } from 'express';
-import { getAllPosts as getAll, getPostById as getPostByIdService, createPost as createPostService } from './postService';
-
+import postService from './postService';
 export function getAllPosts(req: Request, res: Response){
-    const posts = getAll();
+    const posts = postService.getAllPosts();
     res.render('posts', { posts });
 }
 
 export function getPostById(req: Request, res: Response){
     const postId: number = parseInt(req.params.id);
-    const post = getPostByIdService(postId);
+    const post = postService.getPostById(postId);
 
     if (post) {
         res.render('post', { post });
@@ -19,6 +18,6 @@ export function getPostById(req: Request, res: Response){
 }
 
 export function createPost(req: Request, res: Response){
-    const newPost = createPostService(req.body);
+    const newPost = postService.createPost(req.body);
     res.json({ message: 'пост створено', post: newPost });
 }

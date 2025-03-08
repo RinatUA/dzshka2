@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getCommentsByPostId, getCommentsByUserId } from './commentController';
+import commentRepository from './commentRepository';
 
 const router: Router = Router();
 
-router.post('/byPost', getCommentsByPostId);
-router.post('/byUser', getCommentsByUserId);
+router.post('/byPost', commentRepository.getCommentsByPostId);
+router.post('/byUser', commentRepository.getCommentsByUserId);
 
 export default router;

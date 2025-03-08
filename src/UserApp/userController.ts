@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import userService from './userService';
-import { SECRET_KEY } from '../config/config';
-import { sign } from 'jsonwebtoken'
 
 function login(req: Request, res: Response){
     res.render('login')
@@ -12,18 +10,14 @@ function register(req: Request, res: Response){
 }
 
 async function authUser(req: Request, res: Response) {
-    const data = req.body
     try {
         const { email, password } = req.body;
-        const user = await userService.authenticateUser(email, password);
+        const user = await userService.authenticateUser(email, password, res);
 
         if (user == null) {
             return res.status(401).json({ err: 'неправильні дані' });
         }
 
-        const token = sign({ id: user.id, email: user.email, username: user.username, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
-        res.cookie('token', token,);
-        
         res.status(200).json({ message: 'вийшло зайти', user });
     } catch (err) {
         console.error('помилка під час логіну:', err);
@@ -33,17 +27,15 @@ async function authUser(req: Request, res: Response) {
 
 
 async function authRegistration(req: Request, res: Response) {
-    const data = req.body
     const { email, password, username } = req.body;
 
-    const result = await userService.registerUser({ email, password, username });
+    const result = await userService.registerUser({ email, password, username }, res);
 
     if (result.status == 'error'){
         res.send(result.message)
         return
     }
-    const token = sign(result.data, SECRET_KEY, {expiresIn: '1h'})
-    res.cookie('token', token);
+
     res.status(200).json({ status: "ok" }); 
     }
 

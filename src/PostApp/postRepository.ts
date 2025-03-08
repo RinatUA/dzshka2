@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import client from '../client/prismaClient';
 
 async function getAllPosts() {
@@ -7,7 +7,7 @@ async function getAllPosts() {
         return posts;
     } catch (err) {
         if (err instanceof Prisma.PrismaClientKnownRequestError) {
-            if (err.code == 'P2002') {
+            if (err == 'P2002') {
                 console.log('порушення унікальності');
                 throw err; 
             }
@@ -27,7 +27,7 @@ async function getPostById(id: number) {
         return post;
     } catch (err) {
         if (err instanceof Prisma.PrismaClientKnownRequestError) {
-            if (err.code == 'P2015') {
+            if (err == 'P2015') {
                 console.log('продукт з цим id не знайдено');
                 throw err;
             }
@@ -45,7 +45,7 @@ async function createPost(data: Prisma.PostCreateInput) {
         return post;
     } catch (err) {
         if (err instanceof Prisma.PrismaClientKnownRequestError) {
-            if (err.code == 'P2002') {
+            if (err == 'P2002') {
                 console.log('продукт вже існує');
                 throw err;
             }
@@ -55,10 +55,25 @@ async function createPost(data: Prisma.PostCreateInput) {
     }
 }
 
+async function deletePost() {
+    try {
+        const post = await postRepository.deletePost;
+        if (!post) {
+            return { status: 'error', message: 'пост не знайдено' };
+        }
+
+        return { status: 'success', data: post };
+    } catch (error) {
+        console.error(error);
+        return { status: 'error', message: 'помилка серверу' };
+    }
+}
+
 const postRepository = {
     getAllPosts,
     getPostById,
-    createPost
+    createPost,
+    deletePost
 };
 
 export default postRepository;
